@@ -49,6 +49,14 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             validateFieldNotEmpty()
         }
+
+        button_goto_list.setOnClickListener {
+            startActivity(ListViewActivity.newIntent(this))
+        }
+
+        button_goto_recycler.setOnClickListener {
+            startActivity(RecyclerActivity.newInstance(this))
+        }
     }
     private fun showGenericErrorDialog(context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
