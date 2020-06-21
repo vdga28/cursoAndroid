@@ -1,4 +1,5 @@
 package com.example.demoandroid
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -8,7 +9,6 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.File
 import java.io.IOException
@@ -18,6 +18,9 @@ import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
 
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_TAKE_PHOTO = 1
+    private var currentPhotoPath: String = ""
     var name: String = ""
     var lastName: String = ""
     var email: String = ""
@@ -35,10 +38,6 @@ class ProfileActivity : AppCompatActivity() {
         user_email.text = email
 
     }
-
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val REQUEST_TAKE_PHOTO = 1
-    private var currentPhotoPath: String = ""
 
 
     private fun dispatchTakePictureIntent() {
@@ -90,6 +89,17 @@ class ProfileActivity : AppCompatActivity() {
         if (imgFile.exists()) {
             val myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath())
             profile_picture.setImageBitmap(myBitmap)
+        }
+    }
+
+
+    companion object {
+        fun newInstance(name: String, lastName: String, email:String, context : Context): Intent {
+            return  Intent(context, ProfileActivity::class.java).apply {
+                putExtra(Constants.EXTRA_NAME, name)
+                putExtra(Constants.EXTRA_LAST_NAME, lastName)
+                putExtra(Constants.EXTRA_EMAIL, email)
+            }
         }
     }
 

@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var lastNameField: EditText
     private lateinit var button: Button
+    var name : String = nameField.text.toString()
+    var lastname : String = lastNameField.text.toString()
+    var userEmail : String = emailField.text.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         emailField = findViewById(R.id.email_field)
         passwordField = findViewById(R.id.password_field)
         lastNameField = findViewById(R.id.lastname_field)
+
+
         lastname_field.setOnFocusChangeListener { v, hasFocus ->
             if (lastname_field.checkEmpty()) {
                 showToast("campo vacio")
@@ -71,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         if (emailField.checkEmpty() || nameField.checkEmpty() || passwordField.checkEmpty() || lastname_field.checkEmpty()) {
             showGenericErrorDialog(this)
         } else {
-            sendData()
+            sendData(lastName = lastname, name = name, email = userEmail)
         }
     }
     private fun showToast(name: String) {
@@ -81,12 +86,8 @@ class MainActivity : AppCompatActivity() {
         return this.text.isEmpty()
     }
 
-    fun sendData() {
-        val intent = Intent(this, ProfileActivity::class.java).apply {
-            putExtra(Constants.EXTRA_NAME, nameField.text)
-            putExtra(Constants.EXTRA_LAST_NAME, lastNameField.text)
-            putExtra(Constants.EXTRA_EMAIL, emailField.text)
-        }
+    fun sendData(name: String, lastName: String, email:String) {
+        val intent = ProfileActivity.newInstance(name, lastName, email, this)
         startActivity(intent)
     }
 }
