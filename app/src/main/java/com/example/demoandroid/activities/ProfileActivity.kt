@@ -1,4 +1,4 @@
-package com.example.demoandroid
+package com.example.demoandroid.activities
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -9,6 +9,8 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.example.demoandroid.utils.Constants
+import com.example.demoandroid.R
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.File
 import java.io.IOException

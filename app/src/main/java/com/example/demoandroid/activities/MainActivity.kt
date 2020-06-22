@@ -1,7 +1,6 @@
-package com.example.demoandroid
+package com.example.demoandroid.activities
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.demoandroid.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var lastNameField: EditText
     private lateinit var button: Button
-    var name : String = nameField.text.toString()
-    var lastname : String = lastNameField.text.toString()
-    var userEmail : String = emailField.text.toString()
+    var name : String = ""
+    var lastname : String = ""
+    var userEmail : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,11 +56,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         button_goto_list.setOnClickListener {
-            startActivity(ListViewActivity.newIntent(this))
+            startActivity(
+                ListViewActivity.newIntent(
+                    this
+                )
+            )
         }
 
         button_goto_recycler.setOnClickListener {
-            startActivity(RecyclerActivity.newInstance(this))
+            startActivity(
+                RecyclerActivity.newInstance(
+                    this
+                )
+            )
+        }
+
+        goToCharactersActivity.setOnClickListener {
+            startActivity(CharactersActivity.newIntent(this))
         }
     }
     private fun showGenericErrorDialog(context: Context) {
@@ -84,6 +96,9 @@ class MainActivity : AppCompatActivity() {
         if (emailField.checkEmpty() || nameField.checkEmpty() || passwordField.checkEmpty() || lastname_field.checkEmpty()) {
             showGenericErrorDialog(this)
         } else {
+            name = nameField.text.toString()
+            lastname = lastNameField.text.toString()
+            userEmail = emailField.text.toString()
             sendData(lastName = lastname, name = name, email = userEmail)
         }
     }
