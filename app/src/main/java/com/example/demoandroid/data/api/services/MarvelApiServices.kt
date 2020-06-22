@@ -5,6 +5,7 @@ import com.example.demoandroid.data.models.ComicsResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface MarvelApiServices {

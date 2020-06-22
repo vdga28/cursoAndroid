@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity() {
         goToCharactersActivity.setOnClickListener {
             startActivity(CharactersActivity.newIntent(this))
         }
+
+        goToComicsActivity.setOnClickListener {
+            startActivity(ComicsActivity.newIntent(this))
+        }
     }
     private fun showGenericErrorDialog(context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)

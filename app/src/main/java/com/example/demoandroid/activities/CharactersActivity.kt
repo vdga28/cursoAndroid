@@ -25,26 +25,12 @@ class CharactersActivity : AppCompatActivity() {
     private lateinit var adapter: CharactersAdapter
     private var characters: List<CharacterResult>? = null
     private val apiClient = ApiClient()
-    private var myJob: Job? = null
-
-    init {
-
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic)
         linearLayoutManager = LinearLayoutManager(this)
         getComicList()
-
-        myJob = CoroutineScope(Dispatchers.IO).launch {
-            val result = getComics()
-
-            withContext(Dispatchers.Main) {
-                Toast.makeText(this@CharactersActivity, result?.comicsData?.comicResults?.first()?.title, Toast.LENGTH_LONG).show()
-            }
-        }
     }
 
 
@@ -75,14 +61,6 @@ class CharactersActivity : AppCompatActivity() {
                 }
 
             })
-    }
-
-    private suspend fun getComics(): ComicsResponse? {
-        return apiClient.getService(this).getComics(
-            Constants.apikey,
-            Constants.hash,
-            Constants.ts
-        )
     }
 
     companion object {

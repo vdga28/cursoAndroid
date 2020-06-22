@@ -15,11 +15,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.CharactersActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activities.ComicsActivity"></activity>
+        <activity android:name=".activities.CharactersActivity" />
         <activity android:name=".activities.RecyclerActivity" />
         <activity android:name=".activities.ListViewActivity" />
         <activity android:name=".activities.MainActivity">
