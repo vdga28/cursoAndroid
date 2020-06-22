@@ -1,22 +1,26 @@
-package com.example.demoandroid
+package com.example.demoandroid.adapters
 
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.demoandroid.R
+import com.example.demoandroid.utils.inflate
 import kotlinx.android.synthetic.main.list_view_row.view.*
 
 class RecyclerAdapter(private val values: List<String>) :
     RecyclerView.Adapter<RecyclerAdapter.RowHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.RowHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowHolder {
         val inflatedView = parent.inflate(R.layout.list_view_row, false)
-        return RowHolder(inflatedView)
+        return RowHolder(
+            inflatedView
+        )
     }
 
     override fun getItemCount() = values.size
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.RowHolder, position: Int) {
+    override fun onBindViewHolder(holder: RowHolder, position: Int) {
         holder.bindHolder(values[position])
     }
 

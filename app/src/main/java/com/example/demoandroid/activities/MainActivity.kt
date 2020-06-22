@@ -1,7 +1,6 @@
-package com.example.demoandroid
+package com.example.demoandroid.activities
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.demoandroid.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var lastNameField: EditText
     private lateinit var button: Button
+    var name : String = ""
+    var lastname : String = ""
+    var userEmail : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         emailField = findViewById(R.id.email_field)
         passwordField = findViewById(R.id.password_field)
         lastNameField = findViewById(R.id.lastname_field)
+
+
         lastname_field.setOnFocusChangeListener { v, hasFocus ->
             if (lastname_field.checkEmpty()) {
                 showToast("campo vacio")
@@ -51,11 +56,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         button_goto_list.setOnClickListener {
-            startActivity(ListViewActivity.newIntent(this))
+            startActivity(
+                ListViewActivity.newIntent(
+                    this
+                )
+            )
         }
 
         button_goto_recycler.setOnClickListener {
-            startActivity(RecyclerActivity.newInstance(this))
+            startActivity(
+                RecyclerActivity.newInstance(
+                    this
+                )
+            )
+        }
+
+        goToCharactersActivity.setOnClickListener {
+            startActivity(CharactersActivity.newIntent(this))
+        }
+
+        goToComicsActivity.setOnClickListener {
+            startActivity(ComicsActivity.newIntent(this))
         }
     }
     private fun showGenericErrorDialog(context: Context) {
@@ -79,7 +100,10 @@ class MainActivity : AppCompatActivity() {
         if (emailField.checkEmpty() || nameField.checkEmpty() || passwordField.checkEmpty() || lastname_field.checkEmpty()) {
             showGenericErrorDialog(this)
         } else {
-            sendData()
+            name = nameField.text.toString()
+            lastname = lastNameField.text.toString()
+            userEmail = emailField.text.toString()
+            sendData(lastName = lastname, name = name, email = userEmail)
         }
     }
     private fun showToast(name: String) {
@@ -89,12 +113,8 @@ class MainActivity : AppCompatActivity() {
         return this.text.isEmpty()
     }
 
-    fun sendData() {
-        val intent = Intent(this, ProfileActivity::class.java).apply {
-            putExtra(Constants.EXTRA_NAME, nameField.text)
-            putExtra(Constants.EXTRA_LAST_NAME, lastNameField.text)
-            putExtra(Constants.EXTRA_EMAIL, emailField.text)
-        }
+    fun sendData(name: String, lastName: String, email:String) {
+        val intent = ProfileActivity.newInstance(name, lastName, email, this)
         startActivity(intent)
     }
 }

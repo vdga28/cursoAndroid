@@ -1,4 +1,4 @@
-package com.example.demoandroid
+package com.example.demoandroid.utils
 
 import android.view.LayoutInflater
 import android.view.View
