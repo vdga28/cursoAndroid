@@ -1,4 +1,4 @@
-package com.example.demoandroid.adapters
+package com.example.demoandroid.view.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

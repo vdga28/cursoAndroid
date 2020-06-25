@@ -10,8 +10,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiClient {
-    fun getService(context: Context?): MarvelApiServices {
+class ApiClient(val context: Context?) {
+    fun getService(): MarvelApiServices {
         //val preferencesManager = PreferencesManager(context, Constants.TOKEN_SESSION)
 
         val serviceLogging = HttpLoggingInterceptor()

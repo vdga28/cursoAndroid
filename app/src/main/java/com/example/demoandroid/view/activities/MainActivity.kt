@@ -1,4 +1,4 @@
-package com.example.demoandroid.activities
+package com.example.demoandroid.view.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +13,7 @@ import com.example.demoandroid.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var nameField: EditText
     private lateinit var passwordField: EditText
     private lateinit var emailField: EditText
