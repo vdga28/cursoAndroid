@@ -1,4 +1,4 @@
-package com.example.demoandroid.activities
+package com.example.demoandroid.view.activities
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demoandroid.R
-import com.example.demoandroid.adapters.RecyclerAdapter
+import com.example.demoandroid.view.adapters.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_recycler.*
 
 class RecyclerActivity : AppCompatActivity() {

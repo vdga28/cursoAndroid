@@ -1,4 +1,4 @@
-package com.example.demoandroid.activities
+package com.example.demoandroid.view.activities
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory

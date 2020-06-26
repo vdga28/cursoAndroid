@@ -1,11 +1,11 @@
-package com.example.demoandroid.activities
+package com.example.demoandroid.view.activities
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.demoandroid.R
-import com.example.demoandroid.adapters.SimpleArrayAdapter
+import com.example.demoandroid.view.adapters.SimpleArrayAdapter
 import kotlinx.android.synthetic.main.activity_list_view.*
 
 
