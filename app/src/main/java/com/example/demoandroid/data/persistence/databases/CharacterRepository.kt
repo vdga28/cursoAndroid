@@ -30,4 +30,9 @@ class CharacterRepository(context: Context) {
     suspend fun delete(character: CharacterResult) {
         characterDao?.deleteCharacter(character)
     }
+
+    suspend fun getById(id: Int): Boolean {
+        val character = characterDao?.getCharacterById(id)
+        return character != null
+    }
 }

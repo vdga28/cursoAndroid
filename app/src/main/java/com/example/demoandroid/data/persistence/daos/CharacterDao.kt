@@ -9,6 +9,9 @@ interface CharacterDao {
     @Query("SELECT * FROM CHARACTER ORDER BY ID")
     suspend fun loadAllCharacters(): List<CharacterResult>
 
+    @Query("SELECT * FROM CHARACTER WHERE ID=:id ")
+    suspend fun getCharacterById(id: Int) : CharacterResult?
+
     @Insert
     fun insertCharacter(character: CharacterResult)
 
