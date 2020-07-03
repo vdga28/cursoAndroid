@@ -10,7 +10,7 @@ import com.example.demoandroid.utils.inflate
 import com.example.demoandroid.data.models.CharacterResult
 import kotlinx.android.synthetic.main.list_view_row.view.*
 
-class CharactersAdapter :
+class CharactersAdapter(private val characterViewHolderListener: CharacterViewHolderListener? = null) :
     RecyclerView.Adapter<CharactersAdapter.RowHolder>() {
 
     private val values: MutableList<CharacterResult> = mutableListOf()
@@ -21,11 +21,23 @@ class CharactersAdapter :
     }
 
     fun updateView(values: List<CharacterResult>) {
+        this.values.clear()
         this.values.addAll(values)
         notifyDataSetChanged()
     }
 
+    override fun onBindViewHolder(holder: RowHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+        holder.itemView.setOnClickListener {
+            characterViewHolderListener?.onCharacterItemClicked(values[position])
+        }
+    }
+
     override fun getItemCount() = values.size
+
+    interface CharacterViewHolderListener {
+        fun onCharacterItemClicked(characterResult: CharacterResult)
+    }
 
     class RowHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         private var view: View = v

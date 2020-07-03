@@ -9,22 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demoandroid.R
 import com.example.demoandroid.data.models.CharacterResult
 import com.example.demoandroid.view.adapters.CharactersAdapter
-import com.example.demoandroid.viewmodels.CharactersViewModel
+import com.example.demoandroid.viewmodels.FavoriteCharactersViewModel
 import kotlinx.android.synthetic.main.activity_comic.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class CharactersActivity : AppCompatActivity() {
+class FavoriteCharactersActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: CharactersAdapter
 
-    private val viewModel: CharactersViewModel by viewModel()
+    private val viewModel: FavoriteCharactersViewModel by viewModel()
 
-    private val characterViewHolderListener = object: CharactersAdapter.CharacterViewHolderListener {
-        override fun onCharacterItemClicked(characterResult: CharacterResult) {
-            viewModel.insert(characterResult)
+    private val characterViewHolderListener =
+        object : CharactersAdapter.CharacterViewHolderListener {
+            override fun onCharacterItemClicked(characterResult: CharacterResult) {
+                viewModel.delete(characterResult)
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +42,17 @@ class CharactersActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.characters.observe(this, Observer {
-            adapter.updateView(it)
+        viewModel.characters?.observe(this, Observer {
+            it?.let {
+                adapter.updateView(it)
+            }
         })
-        viewModel.getComicList()
+        viewModel.getAll()
     }
 
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, CharactersActivity::class.java)
+            return Intent(context, FavoriteCharactersActivity::class.java)
         }
     }
 }
